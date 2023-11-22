@@ -1,0 +1,35 @@
+{
+  "name": "insidious-bot",
+  "author": {
+    "email": "hyperion@remortality.com",
+    "name": "InfinitlyUndefined",
+    "url": "https://github.com/InfinitlyUndefined"
+  },
+  "module": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "db:generate": "drizzle-kit generate:sqlite --schema=src/lib/db/schemas",
+    "db:migrate": "bun run src/lib/db/migrate.ts"
+  },
+  "devDependencies": {
+    "@types/eslint": "^8.44.7",
+    "@typescript-eslint/eslint-plugin": "^6.12.0",
+    "@typescript-eslint/parser": "^6.12.0",
+    "bun-types": "^1.0.13",
+    "drizzle-kit": "^0.20.4",
+    "eslint": "^8.54.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.0",
+    "prettier": "^3.1.0",
+    "tsup": "^8.0.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "colorette": "^2.0.20",
+    "discord.js": "^14.14.1",
+    "drizzle-orm": "^0.29.0"
+  }
+}

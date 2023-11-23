@@ -17,6 +17,8 @@ module.exports = {
     ".prettierrc",
     ".prettierignore",
     "readme.md",
+    ".gitignore",
+    "dist",
   ],
   settings: {
     "import/resolver": {
@@ -26,7 +28,7 @@ module.exports = {
       },
       typescript: {
         project: "./tsconfig.json",
-      }
+      },
     },
   },
   root: true,

@@ -26,9 +26,15 @@ export async function handleListeners(
         default: Listener;
       };
 
-      client.listener.set(listener.name, listener);
+      client.customListeners.set(listener.name, listener);
 
       listeners.push(listener);
+
+      if (listener.once) {
+        client.once(listener.name, listener.callback);
+      } else {
+        client.on(listener.name, listener.callback);
+      }
     }
   }
 

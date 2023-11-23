@@ -3,13 +3,12 @@ import {
   Collection,
   Client as DJSClient,
 } from "discord.js";
-import { Command } from "./Command";
-import { Listener } from "./Listener";
-import { Logger } from "./Logger";
+import { Command, Listener, Logger } from "@lib/structures";
+import { handleRegistry, initiateCommands, handleListeners } from "@lib/util";
 
 export class Client<Ready extends boolean = boolean> extends DJSClient<Ready> {
   public readonly commands = new Collection<string, Command>();
-  public readonly listener = new Collection<string, Listener>();
+  public readonly customListeners = new Collection<string, Listener>();
   public readonly ownerIds: string[] = [];
   public readonly commandsDir: string;
   public readonly listenersDir: string;
@@ -23,7 +22,10 @@ export class Client<Ready extends boolean = boolean> extends DJSClient<Ready> {
   }
 
   public override async login(token?: string | undefined): Promise<string> {
+    await handleRegistry(this.commandsDir, this);
+    await handleListeners(this.listenersDir, this);
     const promiseString = await super.login(token);
+    await initiateCommands(this, true, true);
     return promiseString;
   }
 }
@@ -38,7 +40,7 @@ declare module "discord.js" {
   interface Client {
     ownerIds: string[];
     commands: Collection<string, Command>;
-    listener: Collection<string, Listener>;
+    customListeners: Collection<string, Listener>;
     logger: Logger;
   }
 }

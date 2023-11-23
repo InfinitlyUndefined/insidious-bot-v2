@@ -9,8 +9,8 @@ const client = new Client({
     GatewayIntentBits.DirectMessages,
   ],
   partials: [Partials.GuildMember, Partials.Message, Partials.User],
-  commandsDir: "src/commands",
-  listenersDir: "src/listeners",
+  commandsDir: "dist/commands",
+  listenersDir: "dist/listeners",
   ownerIds: ["807741099367989308"],
 });
 

@@ -1,9 +1,9 @@
 import {
-  ApplicationCommandOptionData,
+  type ApplicationCommandOptionData,
   AutocompleteInteraction,
   ChatInputCommandInteraction,
   MessageContextMenuCommandInteraction,
-  PermissionResolvable,
+  type PermissionResolvable,
   UserContextMenuCommandInteraction,
 } from "discord.js";
 
@@ -28,7 +28,7 @@ export class Command<T extends CommandType = CommandType> {
     this.description = options.description ?? "";
     this.permissions = options.permissions;
     this.ownerOnly = options.ownerOnly;
-    this.guildOnly = options.guildOnly;
+    this.guildOnly = options.guildOnly ?? false;
     this.guildIds = options.guildIds;
     this.nsfw = options.nsfw ?? false;
     this.callback = options.callback as (
@@ -36,7 +36,7 @@ export class Command<T extends CommandType = CommandType> {
     ) => Promise<unknown>;
 
     if (options.type === CommandType.ChatInput) {
-      this.options = options.options;
+      this.options = options.options ?? [];
       this.autoComplete = options.autoComplete;
     }
   }
